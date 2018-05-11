@@ -3,6 +3,7 @@ package com.deverdie.rxjavatext;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.util.concurrent.Callable;
 
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         doSomething();
     }
 
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doSomething() {
+
+        final TextView tvUserId = findViewById(R.id.text);
+
         Observable.fromCallable(new Callable<String>() {
             @Override
             public String call() throws Exception {
@@ -43,12 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("Rx", "onError");
+                        Log.d("Rx", "onError: "+e.getMessage());
+                        tvUserId.setText("-");
                     }
 
                     @Override
-                    public void onNext(String name) {
-                        Log.d("Rx", "Name: " + name);
+                    public void onNext(String id) {
+                        Log.d("Rx", "onNext");
+                        tvUserId.setText(id);
                     }
                 });
     }
