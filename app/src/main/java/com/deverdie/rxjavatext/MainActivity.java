@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         doSomething();
     }
 
-    public List<String> getNameList() {
+    public String getNameList(int index) throws IndexOutOfBoundsException {
         List<String> nameList = Arrays.asList("Cupcake",
                 "Donut",
                 "Eclair",
@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
                 "Lollipop",
                 "Marshmallow",
                 "Nugat");
-        return nameList;
+        return nameList.get(index);
     }
 
     public void doSomething() {
-        Observable.just(getNameList())
-                .subscribe(new Observer<List<String>>() {
+        Observable.just(getNameList(0), getNameList(2), getNameList(4))
+                .subscribe(new Observer<String>() {
                     @Override
                     public void onCompleted() {
                         Log.d("Rx", "onCompleted");
@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("Rx", "onError");
+                        Log.d("Rx", "onError");
                     }
 
                     @Override
-                    public void onNext(List<String> nameList) {
-                        Log.d("Rx", "onNext");
+                    public void onNext(String name) {
+                        Log.d("Rx", "Name: " + name);
                     }
                 });
     }
