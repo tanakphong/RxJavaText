@@ -6,6 +6,7 @@ import android.util.Log;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import rx.Observable;
 import rx.Observer;
@@ -39,7 +40,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void doSomething() {
-        Observable.just(getNameList(0), getNameList(2), getNameList(4))
+        Observable.fromCallable(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return getNameList(100);
+            }
+        })
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onCompleted() {
