@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.Callable;
 
 import rx.Observable;
 import rx.Observer;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,29 +22,19 @@ public class MainActivity extends AppCompatActivity {
         doSomething();
     }
 
-    public String getNameList(int index) throws IndexOutOfBoundsException {
-        List<String> nameList = Arrays.asList("Cupcake",
-                "Donut",
-                "Eclair",
-                "Froyo",
-                "Gingerbread",
-                "Honeycomb",
-                "Ice Cream Sandwich",
-                "Jelly Bean",
-                "Kitkat",
-                "Lollipop",
-                "Marshmallow",
-                "Nugat");
-        return nameList.get(index);
+    public String getUserId() throws InterruptedException {
+        Thread.sleep(5000);
+        return "1234";
     }
 
     public void doSomething() {
         Observable.fromCallable(new Callable<String>() {
             @Override
             public String call() throws Exception {
-                return getNameList(100);
+                return getUserId();
             }
         })
+                .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onCompleted() {
