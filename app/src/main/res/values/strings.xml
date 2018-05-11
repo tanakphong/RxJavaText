@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RxJavaText</string>
+    <string name="text">Hello, world.</string>
+    <string name="button_thai">Thai</string>
+    <string name="button_english">English</string>
+    <string name="send">Send</string>
+    <string name="connect">Connect</string>
 </resources>

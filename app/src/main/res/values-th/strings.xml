@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RxJavaText</string>
+    <string name="text">สวัดดีชาวโลก</string>
+    <string name="button_thai">ไทย</string>
+    <string name="button_english">อังกฤษ</string>
+    <string name="send">ส่งข้อมูล</string>
+    <string name="connect">เชื่อมต่อ</string>
+</resources>
