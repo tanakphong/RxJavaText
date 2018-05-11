@@ -9,6 +9,7 @@ import java.util.concurrent.Callable;
 
 import rx.Observable;
 import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             }
         })
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onCompleted() {
